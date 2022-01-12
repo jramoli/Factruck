@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html class="no-js">
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Factruck</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/templatemo-style.css' %}">
+    <script src="{% static 'js/vendor/modernizr-2.6.2.min.js' %}"></script>
+</head>
+
+<body>
+    <!------------------------------------------------------ SIDEBAR ---------------------------------------------------------------------->
+    <div class="sidebar-menu hidden-xs hidden-sm">
+        <div class="top-section">
+            <div class="profile-image">
+                <!--<img src="{% static 'img/profile.jpg' %}" alt="Volton">-->
+            </div>
+            <h3 class="profile-title">{{user.username}}</h3>
+            <p class="profile-description"><a href="/logout/">Cerrar secion</a></p>
+        </div> <!-- top-section -->
+        <div class="main-navigation">
+            <ul>
+                <li><a href="#top"><i class="fa fa-globe"></i>Bienvenido</a></li>
+                <li><a href="/factura/"><i class="fa fa-pencil"></i>Factura</a></li>
+                <li><a href="/factura_simple/"><i class="fa fa-pencil"></i>Factura simple</a></li>
+            </ul>
+        </div> <!-- .main-navigation -->
+        <div class="social-icons">
+            <ul>
+                <li><a href="/factura/#top"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="/factura_simple/#top"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                <li><a href="#"><i class="fa fa-rss"></i></a></li>
+            </ul>
+        </div> <!-- .social-icons -->
+    </div> <!------------------------------------------------------ .sidebar-menu ------------------------------------------------------>
+
+    <div class="banner-bg" id="top">
+        <div class="banner-overlay"></div>
+        <div class="welcome-text">
+            <h2>Factruck</h2>
+            <h5>Bienvenido {{user.username}}.</h5>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <div class="content-wrapper">
+            <!--*************************************************************************************** FORMULARIO -->
+            {% block contenedor %}
+            {% endblock %}
+            <!--*************************************************************************************** FORMULARIO -->
+            <!-- FOOTER -->
+            <div class="row" id="footer">
+                <div class="col-md-12 text-center">
+                    <p class="copyright-text">Copyright &copy; 2015 Company Name</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="{% static 'js/vendor/jquery-1.10.2.min.js' %}"></script>
+    <script src="{% static 'js/min/plugins.min.js' %}"></script>
+    <script src="{% static 'js/min/main.min.js' %}"></script>
+
+</body></html>
