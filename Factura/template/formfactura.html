@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="row">
-        <form action="#" method="post" class="contact-form">
+        <form action="/factura/" method="post" class="contact-form">
             {% csrf_token %}
             {{ form1.as_p }} 
             <input type="submit" class="button big default" value="Generar factura">
