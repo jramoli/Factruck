@@ -275,9 +275,17 @@ hr {
 /*---------------------------------------------------------
  3. Header
 -------------------------------------------------------- */
+.top-section{
+  padding: 40px;
+}
+
 .profile-content p a{
     color: white;
     text-decoration: none;
+}
+.logout a{
+  color: white;
+  text-decoration: none;
 }
 .sidebar-menu {
   float: left;
@@ -306,10 +314,6 @@ hr {
     .main-content{
         width: 100%
     }
-}
-
-.top-section {
-  padding: 40px;
 }
 
 .profile-image {
@@ -380,7 +384,7 @@ h3.profile-title {
 }
 @media screen and (max-width: 992px) {
   .responsive-header .main-navigation {
-    margin-top: 10px;
+    /*margin-top: 10px;*/
     display: none;
   }
 }
