@@ -30,7 +30,7 @@ http://www.templatemo.com/tm-441-volton
 /*---------------------------------------------------------
  1. Reset
 -------------------------------------------------------- */
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -176,6 +176,10 @@ textarea {
 /*---------------------------------------------------------
  2. Basic Style
 -------------------------------------------------------- */
+form p{
+    width: 100%
+}
+
 body {
   font-size: 14px;
   line-height: 24px;
@@ -271,6 +275,10 @@ hr {
 /*---------------------------------------------------------
  3. Header
 -------------------------------------------------------- */
+.profile-content p a{
+    color: white;
+    text-decoration: none;
+}
 .sidebar-menu {
   float: left;
   width: 23%;
@@ -280,11 +288,24 @@ hr {
   color: white;
   overflow-y: hidden;
 }
-@media screen and (max-width: 1290px) {
-  .sidebar-menu {
-    overflow-y: scroll;
-    width: 30%;
-  }
+/* Este media es para las pantallas de menos de 1000 pixeles */
+@media screen and (min-width: 1000px) {
+    .responsive-header{
+        display: none
+    }
+}
+@media screen and (max-width: 1000px) {
+    .sidebar-menu {
+        display: none
+        /*overflow-y: scroll;*/
+        /*width: 30%;*/
+    }
+    .banner-bg{
+        width: 100%
+    }
+    .main-content{
+        width: 100%
+    }
 }
 
 .top-section {
