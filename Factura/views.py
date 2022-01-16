@@ -2,9 +2,8 @@ import django
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from Factura.Funciones.funciones import *
-from Factura.formulario.formularios import generarfactura, generarfacturasimple
-from Factura.models import *
-from Factura.formulario import *
+from Factura.formulario.formularios import *
+#from Factura.models import *
 # Create your views here.
 
 @login_required
@@ -22,6 +21,16 @@ def view_generar_factura(request):
         _factura = factura.objects.all().filter(cif=_cif, mes=_mes, año=_año)
         _cliente = cliente.objects.all().filter(cif=_cif)
         _empresa = empresa.objects.all().filter(id=_empleado)
+        total = 0
+        for campo in _factura:
+            _id = campo.id
+            kg =  campo.kg
+            precio = campo.precio
+            factura.objects.filter(id=_id).update(total=precio * kg)
+            total = total + (precio * kg)
+        iva = total * (float(_iva) / 100)
+        retencion = total * (float(_retencion) / 100)
+        precio_total = total + iva + retencion
         contexto = {
             'facturas' : _factura,
             'clientes' : _cliente,
@@ -29,7 +38,11 @@ def view_generar_factura(request):
             'fecha' : obtener_fecha,
             'numero_factura' : obtener_numero_factura,
             'mes' : _mes,
-            'año' : _año
+            'año' : _año,
+            'total': round(total,2),
+            'iva' : round(iva,2),
+            'retencion' : round(retencion, 2),
+            'precio_total' : round(precio_total, 2)
         }
         return render (request, "lista.html" ,contexto)
     else:

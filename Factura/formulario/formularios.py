@@ -50,7 +50,7 @@ class generarfactura(forms.Form):
     año = forms.TypedChoiceField(choices = ANNO, widget=forms.Select(attrs={'class':'form-select'}))
     iva = forms.FloatField(initial=21)
     lavado = forms.ChoiceField(choices = CONDICIONAL, widget=forms.Select(attrs={'class':'form-select'}))
-    retencion = forms.FloatField(initial=3)
+    retencion = forms.FloatField(initial=1)
     kilosminimos = forms.ChoiceField(choices = CONDICIONAL, widget=forms.Select(attrs={'class':'form-select'}))
 
 
@@ -60,6 +60,6 @@ class generarfacturasimple(forms.Form):
     año = forms.TypedChoiceField(choices = ANNO, widget=forms.Select(attrs={'class':'form-select'}))
     iva = forms.FloatField(initial=21)
     lavado = forms.ChoiceField(choices = CONDICIONAL, widget=forms.Select(attrs={'class':'form-select'}))
-    retencion = forms.FloatField(initial=3)
+    retencion = forms.FloatField(initial=1)
     kilosminimos = forms.ChoiceField(choices = CONDICIONAL, widget=forms.Select(attrs={'class':'form-select'}))
 
