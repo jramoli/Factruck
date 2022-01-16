@@ -132,6 +132,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 STATICFILES_DIRS = [
     BASE_DIR / 'Factruck/static',
+    BASE_DIR / 'Factura/static',
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

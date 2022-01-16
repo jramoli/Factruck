@@ -1,0 +1,30 @@
+body{
+    width: 100%;
+}
+.contenedor{
+    width: 90%;
+    margin: 0 auto;
+}
+.empresa table {
+    width: 100%;
+}
+.empresa{
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+.cliente{
+    width: 100%;
+    margin-bottom: 10px;
+}
+.cliente table{
+    width: 100%;
+}
+.footer{
+    float: right;
+}
+.camion{
+    width: 100%;
+}
+.camion p{
+    width: 100%;
+}

@@ -9,8 +9,8 @@ class trasformempresa(admin.ModelAdmin):
     list_display=("nif", "nombre", "apellido1", "apellido2")
 
 class trasformfactura(admin.ModelAdmin):
-    list_display=("nif", "origen", "destino", "mes", "año")
-    list_filter=("nif", "origen", "destino", "mes", "año")
+    list_display=("cif", "origen", "destino", "mes", "año")
+    list_filter=("cif", "origen", "destino", "mes", "año")
 
 class trasformfacturasimple(admin.ModelAdmin):
     list_display=("nif", "mes", "año")

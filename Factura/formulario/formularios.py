@@ -43,20 +43,8 @@ ANNO = (
     ('2040','2040'),
 )
 
-#class insertarFactura(forms.ModelForm):
-#    cif = forms.ModelChoiceField(label='Cliente', queryset=cliente.objects.all())
-#    nif = forms.CharField(max_length=50)
-#    origen = forms.CharField(max_length=50)
-#    destino = forms.CharField(max_length=50)
-#    mes = forms.TypedChoiceField(choices = MES)
-#    año = forms.TypedChoiceField(choices = ANNO)
-#    destino = forms.FloatField()
-#    destino = forms.FloatField()
-#    class Meta:
-#        model = factura
-#        fields = '__all__'
-
 class generarfactura(forms.Form):
+    empleado = forms.ModelChoiceField(label='Empleado', queryset=empresa.objects.all(), widget=forms.Select(attrs={'class':'form-select'}))
     cif = forms.ModelChoiceField(label='Cliente', queryset=cliente.objects.all(), widget=forms.Select(attrs={'class':'form-select'}))
     mes = forms.TypedChoiceField(choices = MES, widget=forms.Select(attrs={'class':'form-select'}))
     año = forms.TypedChoiceField(choices = ANNO, widget=forms.Select(attrs={'class':'form-select'}))

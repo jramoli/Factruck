@@ -44,10 +44,13 @@ class empresa(models.Model):
     apellido2=models.CharField(max_length=50)
     calle=models.CharField(max_length=50)
     movil=models.CharField(max_length=50)
+    cp=models.CharField(max_length=50, default='41520')
+    localidad=models.CharField(max_length=50, default='EL VISO DEL ALCOR')
+    provincia=models.CharField(max_length=50, default='Sevilla')
     matricula=models.CharField(max_length=50)
     matricula_remolque=models.CharField(max_length=50)
     def __str__(self):
-        return '%s %s %s %s %s %s %s %s' % (self.nif, self.nombre, self.apellido1, self.apellido2, self.calle, self.movil, self.matricula, self.matricula_remolque)
+        return '%s %s %s' % (self.nombre, self.apellido1, self.apellido2)
 
 class cliente(models.Model):
     cif=models.CharField(max_length=50, primary_key = True)
@@ -67,8 +70,9 @@ class factura(models.Model):
     año=models.CharField(max_length=50, choices=ANNO)
     kg=models.FloatField(default=0.0)
     precio=models.FloatField(default=0.0)
+    total=models.FloatField(default=0.0)
     def __str__(self):
-        return '%s %s %s %s %s %s' % (self.cif, self.nif, self.origen, self.destino, self.mes, self.año)
+        return '%s %s %s %s %s' % (self.cif, self.origen, self.destino, self.mes, self.año)
 
 class factura_simple(models.Model):
     cif=ForeignKey(cliente, on_delete=models.CASCADE)
@@ -77,4 +81,4 @@ class factura_simple(models.Model):
     mes=models.CharField(max_length=50, choices=MES)
     año=models.CharField(max_length=50, choices=ANNO)
     def __str__(self):
-        return '%s %s %s %s %s' % (self.cif, self.nif, self.concepto, self.mes, self.año)
+        return '%s %s %s %s %s' % (self.cif, self.concepto, self.mes, self.año)
