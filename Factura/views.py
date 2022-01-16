@@ -31,8 +31,9 @@ def view_generar_factura(request):
         iva = total * (float(_iva) / 100)
         retencion = total * (float(_retencion) / 100)
         precio_total = total + iva + retencion
+        _factura_con_precio = factura.objects.all().filter(cif=_cif, mes=_mes, año=_año)
         contexto = {
-            'facturas' : _factura,
+            'facturas' : _factura_con_precio,
             'clientes' : _cliente,
             'empresas' : _empresa,
             'fecha' : obtener_fecha,
