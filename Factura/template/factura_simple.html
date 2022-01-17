@@ -83,23 +83,17 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">CIF</th>
-            <th scope="col">Origen</th>
-            <th scope="col">Destino</th>
-            <th scope="col">Kilos</th>
+            <th scope="col">NIF</th>
+            <th scope="col">Concepto</th>
             <th scope="col">Precio</th>
-            <th scope="col">Total</th>
           </tr>
         </thead>
         <tbody>
           {% for factura in facturas %}
           <tr>
-            <td>{{factura.cif_id}}</td>
-            <td>{{factura.origen}}</td>
-            <td>{{factura.destino}}</td>
-            <td>{{factura.kg}}</td>
+            <td>{{factura.nif}}</td>
+            <td>{{factura.concepto}}</td>
             <td>{{factura.precio}}</td>
-            <td>{{factura.total}}</td>
           </tr>
           {% endfor %}
         </tbody>

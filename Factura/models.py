@@ -80,5 +80,6 @@ class factura_simple(models.Model):
     concepto=models.TextField(max_length=1000)
     mes=models.CharField(max_length=50, choices=MES)
     año=models.CharField(max_length=50, choices=ANNO)
+    precio=models.FloatField(default=0.0)
     def __str__(self):
-        return '%s %s %s %s %s' % (self.cif, self.concepto, self.mes, self.año)
+        return '%s %s' % (self.cif, self.concepto)

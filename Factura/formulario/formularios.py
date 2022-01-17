@@ -55,11 +55,9 @@ class generarfactura(forms.Form):
 
 
 class generarfacturasimple(forms.Form):
+    empleado = forms.ModelChoiceField(label='Empleado', queryset=empresa.objects.all(), widget=forms.Select(attrs={'class':'form-select'}))
     cif = forms.ModelChoiceField(label='Cliente', queryset=cliente.objects.all(), widget=forms.Select(attrs={'class':'form-select'}))
     mes = forms.TypedChoiceField(choices = MES, widget=forms.Select(attrs={'class':'form-select'}))
     año = forms.TypedChoiceField(choices = ANNO, widget=forms.Select(attrs={'class':'form-select'}))
     iva = forms.FloatField(initial=21)
-    lavado = forms.ChoiceField(choices = CONDICIONAL, widget=forms.Select(attrs={'class':'form-select'}))
     retencion = forms.FloatField(initial=1)
-    kilosminimos = forms.ChoiceField(choices = CONDICIONAL, widget=forms.Select(attrs={'class':'form-select'}))
-

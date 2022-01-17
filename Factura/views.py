@@ -45,7 +45,7 @@ def view_generar_factura(request):
             'retencion' : round(retencion, 2),
             'precio_total' : round(precio_total, 2)
         }
-        return render (request, "lista.html" ,contexto)
+        return render (request, "factura.html" ,contexto)
     else:
         form1 = generarfactura()
         return render(request,'formfactura.html',{'form1':form1})
@@ -53,7 +53,38 @@ def view_generar_factura(request):
 @login_required
 def view_generar_factura_simple(request):
     if request.method == 'POST':
-        """Por ahora nada"""
+        """ ------------------------------------Calcular factura simple------------------------------------"""
+        _empleado = request.POST.get('empleado')
+        _cif = request.POST.get('cif')
+        _mes = request.POST.get('mes')
+        _año = request.POST.get('año')
+        _iva = request.POST.get('iva')
+        _retencion = request.POST.get('retencion')
+        _factura = factura_simple.objects.all().filter(cif=_cif, mes=_mes, año=_año)
+        _cliente = cliente.objects.all().filter(cif=_cif)
+        _empresa = empresa.objects.all().filter(id=_empleado)
+        total = 0
+        for campo in _factura:
+            precio = campo.precio
+            total = total + precio
+        iva = total * (float(_iva) / 100)
+        retencion = total * (float(_retencion) / 100)
+        precio_total = total + iva + retencion
+        _factura_con_precio = factura_simple.objects.all().filter(cif=_cif, mes=_mes, año=_año)
+        contexto = {
+            'facturas' : _factura_con_precio,
+            'clientes' : _cliente,
+            'empresas' : _empresa,
+            'fecha' : obtener_fecha,
+            'numero_factura' : obtener_numero_factura,
+            'mes' : _mes,
+            'año' : _año,
+            'total': round(total,2),
+            'iva' : round(iva,2),
+            'retencion' : round(retencion, 2),
+            'precio_total' : round(precio_total, 2)
+        }
+        return render (request, "factura_simple.html" ,contexto)
     else:
         form2 = generarfacturasimple()
         return render(request,'formfacturasimple.html',{'form2':form2})
