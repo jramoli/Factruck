@@ -1,3 +1,5 @@
+from email.policy import default
+from signal import default_int_handler
 from django import forms
 from Factura.models import *
 
@@ -44,20 +46,20 @@ ANNO = (
 )
 
 class generarfactura(forms.Form):
-    empleado = forms.ModelChoiceField(label='Empleado', queryset=empresa.objects.all(), widget=forms.Select(attrs={'class':'form-select'}))
-    cif = forms.ModelChoiceField(label='Cliente', queryset=cliente.objects.all(), widget=forms.Select(attrs={'class':'form-select'}))
-    mes = forms.TypedChoiceField(choices = MES, widget=forms.Select(attrs={'class':'form-select'}))
-    año = forms.TypedChoiceField(choices = ANNO, widget=forms.Select(attrs={'class':'form-select'}))
-    iva = forms.FloatField(initial=21)
-    lavado = forms.ChoiceField(choices = CONDICIONAL, widget=forms.Select(attrs={'class':'form-select'}))
-    retencion = forms.FloatField(initial=1)
-    kilosminimos = forms.ChoiceField(choices = CONDICIONAL, widget=forms.Select(attrs={'class':'form-select'}))
+    empleado = forms.ModelChoiceField(label='Empleado', queryset=empresa.objects.all(), widget=forms.Select(attrs={'class':'form-select'}), required=True)
+    cif = forms.ModelChoiceField(label='Cliente', queryset=cliente.objects.all(), widget=forms.Select(attrs={'class':'form-select'}), required=True)
+    mes = forms.TypedChoiceField(choices = MES, widget=forms.Select(attrs={'class':'form-select'}), required=True)
+    año = forms.TypedChoiceField(choices = ANNO, widget=forms.Select(attrs={'class':'form-select'}), required=True)
+    iva = forms.FloatField(required=True, initial=21)
+    lavado = forms.ChoiceField(choices = CONDICIONAL, widget=forms.Select(attrs={'class':'form-select'}), required=True)
+    retencion = forms.FloatField(required=True, initial=1)
+    kilosminimos = forms.ChoiceField(choices = CONDICIONAL, widget=forms.Select(attrs={'class':'form-select'}), required=True)
 
 
 class generarfacturasimple(forms.Form):
-    empleado = forms.ModelChoiceField(label='Empleado', queryset=empresa.objects.all(), widget=forms.Select(attrs={'class':'form-select'}))
-    cif = forms.ModelChoiceField(label='Cliente', queryset=cliente.objects.all(), widget=forms.Select(attrs={'class':'form-select'}))
-    mes = forms.TypedChoiceField(choices = MES, widget=forms.Select(attrs={'class':'form-select'}))
-    año = forms.TypedChoiceField(choices = ANNO, widget=forms.Select(attrs={'class':'form-select'}))
-    iva = forms.FloatField(initial=21)
-    retencion = forms.FloatField(initial=1)
+    empleado = forms.ModelChoiceField(label='Empleado', queryset=empresa.objects.all(), widget=forms.Select(attrs={'class':'form-select'}), required=True)
+    cif = forms.ModelChoiceField(label='Cliente', queryset=cliente.objects.all(), widget=forms.Select(attrs={'class':'form-select'}), required=True)
+    mes = forms.TypedChoiceField(choices = MES, widget=forms.Select(attrs={'class':'form-select'}), required=True)
+    año = forms.TypedChoiceField(choices = ANNO, widget=forms.Select(attrs={'class':'form-select'}), required=True)
+    iva = forms.FloatField(required=True, initial=21)
+    retencion = forms.FloatField(required=True, initial=1)

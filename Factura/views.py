@@ -1,10 +1,13 @@
 import django
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.template.loader import render_to_string
 from django.shortcuts import render
 from Factura.Funciones.funciones import *
 from Factura.formulario.formularios import *
-#from Factura.models import *
-# Create your views here.
+import os
+
+BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 
 @login_required
 def view_generar_factura(request):
@@ -40,12 +43,16 @@ def view_generar_factura(request):
             'numero_factura' : obtener_numero_factura,
             'mes' : _mes,
             'año' : _año,
+            'cantidad_iva' : _iva,
+            'cantidad_retencion' : _retencion,
             'total': round(total,2),
             'iva' : round(iva,2),
             'retencion' : round(retencion, 2),
             'precio_total' : round(precio_total, 2)
         }
-        return render (request, "factura.html" ,contexto)
+        pdf = renderizar_pdf( BASE_DIR + '/../Factura/template/factura.html', contexto)
+        return HttpResponse(pdf, content_type='application/pdf')
+        #return render (request, "factura.html" ,contexto)
     else:
         form1 = generarfactura()
         return render(request,'formfactura.html',{'form1':form1})
@@ -79,6 +86,8 @@ def view_generar_factura_simple(request):
             'numero_factura' : obtener_numero_factura,
             'mes' : _mes,
             'año' : _año,
+            'cantidad_iva' : _iva,
+            'cantidad_retencion' : _retencion,
             'total': round(total,2),
             'iva' : round(iva,2),
             'retencion' : round(retencion, 2),
