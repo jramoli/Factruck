@@ -37,6 +37,18 @@ ANNO = (
     ('2040','2040'),
 )
 
+class temporal(models.Model):
+    empleado=models.CharField(max_length=50)
+    cif=models.CharField(max_length=50)
+    mes=models.CharField(max_length=50)
+    año=models.CharField(max_length=50)
+    iva=models.CharField(max_length=50)
+    lavado=models.CharField(max_length=50)
+    retencion=models.CharField(max_length=50)
+    kilosminimos=models.CharField(max_length=50)
+    def __str__(self):
+        return '%s' % (self.nombre)
+
 class empresa(models.Model):
     nif=models.CharField(max_length=50)
     nombre=models.CharField(max_length=50)
