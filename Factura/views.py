@@ -24,12 +24,13 @@ def view_html_factura(request):
     precio_final = total + iva + retencion
     _factura_con_precio = factura.objects.all().filter(
         cif=array_temporales[1], mes=array_temporales[2], año=array_temporales[3])
+    nfactura = obtener_numero_factura()
     contexto = {
         'facturas': _factura_con_precio,
         'clientes': _cliente,
         'empresas': _empresa,
         'fecha': obtener_fecha,
-        'numero_factura': obtener_numero_factura,
+        'numero_factura': nfactura,
         'mes': array_temporales[2],
         'año': array_temporales[3],
         'cantidad_iva': array_temporales[4],
@@ -42,7 +43,6 @@ def view_html_factura(request):
     return render(request, "factura.html", contexto)
 
 
-@login_required
 def view_html_factura_simple(request):
     array_temporales = obtener_datos_temprales()
     _cliente = cliente.objects.all().filter(cif=array_temporales[1])
@@ -70,7 +70,7 @@ def view_html_factura_simple(request):
     }
     return render(request, "factura_simple.html", contexto)
 
-
+@login_required
 def view_pdf_factura(request):
     if request.method == 'POST':
         """ ------------------------------------obtengo los datos del form------------------------------------"""
@@ -102,10 +102,7 @@ def view_pdf_factura(request):
         form1 = generarfactura()
         return render(request, 'formfactura.html', {'form1': form1})
 
-
-
-
-
+@login_required
 def view_pdf_factura_simple(request):
     if request.method == 'POST':
         """ ------------------------------------obtengo los datos del form------------------------------------"""

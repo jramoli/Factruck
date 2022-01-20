@@ -1,0 +1,48 @@
+body{
+    width: 100%;
+}
+table {
+    width: 100%;
+}
+.contenedor{
+    width: 90%;
+    margin: 0 auto;
+}
+.empresa{
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+/*    Estilos clientes     */
+.cliente{
+    margin-top: 5px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.cliente table{
+
+    width: 100%;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 25px;
+}
+
+.cliente table td{
+    padding: 5px;
+}
+
+/* tabla factua*/
+.tabla-factura td{
+    text-align: left;
+}
+
+.footer{
+    margin-top: 25px;
+    margin-left: 60%;
+}
+.camion{
+    width: 100%;
+}
+.camion p{
+    width: 100%;
+}

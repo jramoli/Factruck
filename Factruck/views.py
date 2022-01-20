@@ -24,7 +24,7 @@ def view_login(request):
             user = authenticate(username=usuario, password=contraseña)
             if user is not None:
                 login(request, user)
-                return redirect(reverse_lazy('factura'))
+                return redirect(reverse_lazy('factura_pdf'))
             else:
                 messages.error(request, 'Usuario o contraseña equivocado')
                 contexto = {'usuario' : usuario}
