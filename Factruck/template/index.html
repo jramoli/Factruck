@@ -21,9 +21,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="top-section">
-                        <div class="profile-image">
+                        <!--<div class="profile-image">
                             <img src="img/profile.jpg" alt="Volton">
-                        </div>
+                        </div>-->
                         <div class="profile-content">
                             <h3 class="profile-title">{{user.username}}</h3>
                             <p class="logout"><a href="/logout/">Cerrar secion</a></p>
@@ -44,17 +44,17 @@
     <!------------------------------------------------------ SIDEBAR ---------------------------------------------------------------------->
     <div class="sidebar-menu">
         <div class="top-section">
-            <div class="profile-image">
-                <!--<img src="{% static 'img/profile.jpg' %}" alt="Volton">-->
-            </div>
+            <!--<div class="profile-image">
+                <img src="{% static 'img/profile.jpg' %}" alt="Volton">
+            </div>-->
             <h3 class="profile-title">{{user.username}}</h3>
             <p class="logout"><a href="/logout/">Cerrar secion</a></p>
         </div> <!-- top-section -->
         <div class="main-navigation">
             <ul>
                 <li><a href="#top"><i class="fa fa-globe"></i>Bienvenido</a></li>
-                <li><a href="/factura/"><i class="fa fa-pencil"></i>Factura</a></li>
-                <li><a href="/factura_simple/"><i class="fa fa-pencil"></i>Factura simple</a></li>
+                <li><a href="/factura_pdf/"><i class="fa fa-pencil"></i>Factura</a></li>
+                <li><a href="/factura_simple_pdf/"><i class="fa fa-pencil"></i>Factura simple</a></li>
             </ul>
         </div> <!-- .main-navigation -->
         <div class="social-icons">

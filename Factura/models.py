@@ -51,7 +51,6 @@ class temporal(models.Model):
         return '%s' % (self.nombre)
 
 class empresa(models.Model):
-    imagen=models.ImageField(null=True, blank=True)
     nif=models.CharField(max_length=50)
     nombre=models.CharField(max_length=50)
     apellido1=models.CharField(max_length=50)
