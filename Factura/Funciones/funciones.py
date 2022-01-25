@@ -57,8 +57,12 @@ def almacenar_total_factura(array_temporales):
         _id = campo.id
         kg = campo.kg
         precio = campo.precio
-        factura.objects.filter(id=_id).update(total=precio * kg)
-        total = total + (precio * kg)
+        if (campo.nif == "LAVADO DE CISTERNA"):
+            factura.objects.filter(id=_id).update(total=precio)
+            total = total + (precio)
+        else:
+            factura.objects.filter(id=_id).update(total=precio * kg)
+            total = total + (precio * kg)
     return float(total)
 
 
@@ -72,3 +76,23 @@ def almacenar_total_factura_simple(array_temporales):
         precio = campo.precio
         total = total + precio
     return float(total)
+
+"""
+Esta funcion tiene en cuenta si esta el lavado de cisterna activada
+"""
+def almacenar_lavado_sisterna(array):
+    try:
+        cif_cliente = "" 
+        _cliente = cliente.objects.all().filter(cif=array[1])
+        for campo in _cliente:
+            cif_cliente = campo.cif
+        
+        SEPARADOR = "LAVADO DE CISTERNA"
+        SEPARADOR = "LAVADO DE CISTERNA"
+        if (array[5] == "SI"):
+            print("Alamaceno")
+            #factura.objects.aggregate(nif=SEPARADOR, origen=SEPARADOR, destino=SEPARADOR, mes=SEPARADOR, año=SEPARADOR, kg="0", precio="80", cif=array[1])
+            p= factura(nif=SEPARADOR, origen="**********", destino=SEPARADOR, mes=array[2], año=array[3], kg="0", precio="80", cif_id=cif_cliente)
+            p.save()
+    except Exception as e:
+        print(repr(e))

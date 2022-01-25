@@ -15,9 +15,13 @@ BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 
 
 def view_html_factura(request):
+    #Esta funcion devuelve un array con los datos del formulario
     array_temporales = obtener_datos_temprales()
+    almacenar_lavado_sisterna(array_temporales)
+    #En estas lineas de abajo obtengo los datos de cliente y empresas segun los datos del formulario
     _cliente = cliente.objects.all().filter(cif=array_temporales[1])
     _empresa = empresa.objects.all().filter(id=array_temporales[0])
+    #En esta funcion se calcula el precio y devuelve un total de todos las lineas
     total = almacenar_total_factura(array_temporales)
     iva = total * (float(array_temporales[4]) / 100)
     retencion = total * (float(array_temporales[6]) / 100)
