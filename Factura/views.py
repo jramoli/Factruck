@@ -27,7 +27,7 @@ def view_html_factura(request):
     retencion = total * (float(array_temporales[6]) / 100)
     precio_final = total + iva + retencion
     _factura_con_precio = factura.objects.all().filter(
-        cif=array_temporales[1], mes=array_temporales[2], año=array_temporales[3])
+        cif_id=array_temporales[1], mes=array_temporales[2], año=array_temporales[3])
     nfactura = obtener_numero_factura()
     contexto = {
         'facturas': _factura_con_precio,
@@ -39,10 +39,10 @@ def view_html_factura(request):
         'año': array_temporales[3],
         'cantidad_iva': array_temporales[4],
         'cantidad_retencion': array_temporales[6],
-        'total': round(total, 2),
-        'iva': round(iva, 2),
-        'retencion': round(retencion, 2),
-        'precio_total': round(precio_final, 2)
+        'total': round(total,2),
+        'iva': round(iva,2),
+        'retencion': round(retencion,2),
+        'precio_total': round(precio_final,2),
     }
     return render(request, "factura.html", contexto)
 
@@ -56,7 +56,7 @@ def view_html_factura_simple(request):
     retencion = total * (float(array_temporales[6]) / 100)
     precio_total = total + iva + retencion
     _factura_con_precio = factura_simple.objects.all().filter(
-        cif=array_temporales[1], mes=array_temporales[2], año=array_temporales[3])
+        cif_id=array_temporales[1], mes=array_temporales[2], año=array_temporales[3])
     contexto = {
         'facturas': _factura_con_precio,
         'clientes': _cliente,
@@ -67,10 +67,10 @@ def view_html_factura_simple(request):
         'año': array_temporales[3],
         'cantidad_iva': array_temporales[4],
         'cantidad_retencion': array_temporales[6],
-        'total': round(total, 2),
-        'iva': round(iva, 2),
-        'retencion': round(retencion, 2),
-        'precio_total': round(precio_total, 2)
+        'total': round(total,2),
+        'iva': round(iva,2), 
+        'retencion': round(retencion,2),
+        'precio_total': round(precio_total,2),
     }
     return render(request, "factura_simple.html", contexto)
 
@@ -85,7 +85,6 @@ def view_pdf_factura(request):
         _iva = request.POST.get('iva')
         _lavado = request.POST.get('lavado')
         _retencion = request.POST.get('retencion')
-        _kilosminimos = request.POST.get('kilosminimos')
 
         temporal.objects.filter(id=1).update(empleado=_empleado)
         temporal.objects.filter(id=1).update(cif=_cif)
@@ -94,7 +93,7 @@ def view_pdf_factura(request):
         temporal.objects.filter(id=1).update(iva=_iva)
         temporal.objects.filter(id=1).update(lavado=_lavado)
         temporal.objects.filter(id=1).update(retencion=_retencion)
-        temporal.objects.filter(id=1).update(kilosminimos=_kilosminimos)
+        temporal.objects.filter(id=1).update(kilosminimos="25000")
 
         path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
         config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
@@ -128,7 +127,6 @@ def view_pdf_factura_simple(request):
         config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
         pdf = pdfkit.from_url('http://127.0.0.1:8000/factura_simple/', configuration=config)
         response = HttpResponse(pdf, content_type='application/pdf')
-
         return response
     else:
         form2 = generarfacturasimple()

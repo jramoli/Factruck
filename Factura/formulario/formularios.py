@@ -53,7 +53,6 @@ class generarfactura(forms.Form):
     iva = forms.FloatField(required=True, initial=21)
     lavado = forms.ChoiceField(choices = CONDICIONAL, widget=forms.Select(attrs={'class':'form-select'}), required=True)
     retencion = forms.FloatField(required=True, initial=1)
-    kilosminimos = forms.ChoiceField(choices = CONDICIONAL, widget=forms.Select(attrs={'class':'form-select'}), required=True)
 
 
 class generarfacturasimple(forms.Form):

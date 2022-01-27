@@ -1,3 +1,4 @@
+from email.policy import default
 from pyexpat import model
 from django.db import models
 from django.db.models.fields.related import ForeignKey
@@ -75,7 +76,7 @@ class cliente(models.Model):
         return '%s' % (self.nombre)
 
 class factura(models.Model):
-    cif=ForeignKey(cliente, on_delete=models.CASCADE)
+    cif=ForeignKey(cliente, on_delete=models.CASCADE, default=0.0)
     nif=models.CharField(max_length=50)
     origen=models.CharField(max_length=50)
     destino=models.CharField(max_length=50)
@@ -85,7 +86,7 @@ class factura(models.Model):
     precio=models.FloatField(default=0.0)
     total=models.FloatField(default=0.0)
     def __str__(self):
-        return '%s %s %s %s %s' % (self.cif, self.origen, self.destino, self.mes, self.año)
+        return '%s %s %s %s %s' % (self.nif, self.origen, self.destino, self.mes, self.año)
 
 class factura_simple(models.Model):
     cif=ForeignKey(cliente, on_delete=models.CASCADE)

@@ -51,18 +51,18 @@ def obtener_datos_temprales():
 Esta funcion de abajo es la que calcula el precio final y el precio total de la factura normal
 """
 def almacenar_total_factura(array_temporales):
-    _factura = factura.objects.all().filter(cif=array_temporales[1], mes=array_temporales[2], año=array_temporales[3])
+    _factura = factura.objects.all().filter(mes=array_temporales[2], año=array_temporales[3], cif_id=array_temporales[1])
     total = 0
     for campo in _factura:
         _id = campo.id
         kg = campo.kg
         precio = campo.precio
-        if (campo.nif == "LAVADO DE CISTERNA"):
+        if (campo.origen == "LAVADO DE CISTERNA"):
             factura.objects.filter(id=_id).update(total=precio)
             total = total + (precio)
         else:
-            factura.objects.filter(id=_id).update(total=precio * kg)
-            total = total + (precio * kg)
+            factura.objects.filter(id=_id).update(total=round(precio * (kg / 1000), 2))
+            total = total + (precio * (kg / 1000))
     return float(total)
 
 
@@ -70,7 +70,7 @@ def almacenar_total_factura(array_temporales):
 Esta funcion es la que calcula el precio final para la factura simple
 """
 def almacenar_total_factura_simple(array_temporales):
-    _factura = factura_simple.objects.all().filter(cif=array_temporales[1], mes=array_temporales[2], año=array_temporales[3])
+    _factura = factura_simple.objects.all().filter(mes=array_temporales[2], año=array_temporales[3], cif_id=array_temporales[1])
     total = 0
     for campo in _factura:
         precio = campo.precio
@@ -82,17 +82,19 @@ Esta funcion tiene en cuenta si esta el lavado de cisterna activada
 """
 def almacenar_lavado_sisterna(array):
     try:
-        cif_cliente = "" 
-        _cliente = cliente.objects.all().filter(cif=array[1])
-        for campo in _cliente:
-            cif_cliente = campo.cif
-        
-        SEPARADOR = "LAVADO DE CISTERNA"
-        SEPARADOR = "LAVADO DE CISTERNA"
-        if (array[5] == "SI"):
-            print("Alamaceno")
-            #factura.objects.aggregate(nif=SEPARADOR, origen=SEPARADOR, destino=SEPARADOR, mes=SEPARADOR, año=SEPARADOR, kg="0", precio="80", cif=array[1])
-            p= factura(nif=SEPARADOR, origen="**********", destino=SEPARADOR, mes=array[2], año=array[3], kg="0", precio="80", cif_id=cif_cliente)
+        lavado_repetido = 0
+        #Con el _factura y el for compruebo si ya hay un lavado de cisterna en la factura de ese mes y año para no añadirlo duplicado
+        _factura = factura.objects.all().filter(mes=array[2], año=array[3], cif_id=array[1])
+        for campo in _factura:
+            if (campo.origen == "LAVADO DE CISTERNA"):
+                lavado_repetido = lavado_repetido + 1
+                 
+        LAVADO = "LAVADO DE CISTERNA"
+        SEPARADOR = "**********"
+        if (array[5] == "SI" and lavado_repetido == 0):
+            p=factura(cif_id=array[1], nif=SEPARADOR, origen=LAVADO, destino=SEPARADOR, mes=array[2], año=array[3], kg="0", precio="80")
             p.save()
+        if(array[5] == "NO" and lavado_repetido == 1):
+            factura.objects.filter(cif_id=array[1], nif=SEPARADOR, origen=LAVADO, destino=SEPARADOR, mes=array[2], año=array[3], kg="0", precio="80").delete()
     except Exception as e:
         print(repr(e))
