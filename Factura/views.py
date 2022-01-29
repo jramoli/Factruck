@@ -97,7 +97,7 @@ def view_pdf_factura(request):
 
         path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
         config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
-        pdf = pdfkit.from_url('http://127.0.0.1:8000/factura/', configuration=config)
+        pdf = pdfkit.from_url('http://192.168.18.2:8000/factura/', configuration=config)
         response = HttpResponse(pdf, content_type='application/pdf')
 
         return response
@@ -125,7 +125,7 @@ def view_pdf_factura_simple(request):
 
         path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
         config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
-        pdf = pdfkit.from_url('http://127.0.0.1:8000/factura_simple/', configuration=config)
+        pdf = pdfkit.from_url('http://192.168.18.2:8000/factura_simple/', configuration=config)
         response = HttpResponse(pdf, content_type='application/pdf')
         return response
     else:

@@ -26,7 +26,7 @@ urlpatterns = [
     path('login/', view_login, name='login'),
     path('logout/', view_logout, name='logout'),
     path('factura/', view_html_factura, name='factura'),
-    path('factura_pdf/', view_pdf_factura, name='factura_pdf'),
+    path('', view_pdf_factura, name='factura_pdf'),
     path('factura_simple/', view_html_factura_simple, name='factura_simple'),
     path('factura_simple_pdf/', view_pdf_factura_simple, name='factura_simple_pdf'),
 ]
