@@ -23,7 +23,6 @@ RUN dpkg -i driver/wkhtmltox_0.12.6-1.focal_amd64.deb
 #Instalar librerias python3
 RUN python3 -m pip install pdfkit
 RUN python3 -m pip install django
-RUN python3 -m pip pip install django-admin-interface
+RUN python3 -m pip install django-admin-interface
 
-CMD ["index.py"]
-ENTRYPOINT ["python3"]
+CMD python3 manage.py runserver 0.0.0.0:8000
