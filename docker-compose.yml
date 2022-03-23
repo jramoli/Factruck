@@ -1,0 +1,19 @@
+version: "3.8"
+
+networks:
+    factruck:
+      driver: bridge
+      name: factruck-global
+
+services:
+    # Django
+    factruck:
+        container_name: Factruck
+        build: ./
+        restart: always
+        ports:
+          - "80:8000"
+        #volumes:
+        #  - ./mongodatabase:/data/db
+        networks:
+          - factruck     
