@@ -96,8 +96,8 @@ def view_pdf_factura(request):
         temporal.objects.filter(id=1).update(retencion=_retencion)
         temporal.objects.filter(id=1).update(kilosminimos="25000")
 
-        #path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
-        path_wkhtmltopdf = '/usr/local/bin/wkhtmltopdf'
+        path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+        #path_wkhtmltopdf = '/usr/local/bin/wkhtmltopdf'
         config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
         pdf = pdfkit.from_url('http://127.0.0.1:8000/factura/', configuration=config)
         response = HttpResponse(pdf, content_type='application/pdf')
