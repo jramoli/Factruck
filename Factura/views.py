@@ -25,7 +25,7 @@ def view_html_factura(request):
     total = almacenar_total_factura(array_temporales)
     iva = total * (float(array_temporales[4]) / 100)
     retencion = total * (float(array_temporales[6]) / 100)
-    precio_final = total + iva + retencion
+    precio_final = total + iva - retencion
     _factura_con_precio = factura.objects.all().filter(
         cif_id=array_temporales[1], mes=array_temporales[2], año=array_temporales[3])
     nfactura = obtener_numero_factura()
@@ -55,7 +55,7 @@ def view_html_factura_simple(request):
     total = almacenar_total_factura_simple(array_temporales)
     iva = total * (float(array_temporales[4]) / 100)
     retencion = total * (float(array_temporales[6]) / 100)
-    precio_total = total + iva + retencion
+    precio_total = total + iva - retencion
     _factura_con_precio = factura_simple.objects.all().filter(
         cif_id=array_temporales[1], mes=array_temporales[2], año=array_temporales[3])
     contexto = {
