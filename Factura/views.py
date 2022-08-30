@@ -28,7 +28,7 @@ def view_html_factura(request):
     precio_final = total + iva - retencion
     _factura_con_precio = factura.objects.all().filter(
         cif_id=array_temporales[1], mes=array_temporales[2], año=array_temporales[3])
-    nfactura = obtener_numero_factura()
+    nfactura = obtener_numero_factura(array_temporales[0], array_temporales[2], array_temporales[3])
     contexto = {
         'facturas': _factura_con_precio,
         'clientes': _cliente,
@@ -96,10 +96,10 @@ def view_pdf_factura(request):
         temporal.objects.filter(id=1).update(retencion=_retencion)
         temporal.objects.filter(id=1).update(kilosminimos="25000")
 
-        path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
-        #path_wkhtmltopdf = '/usr/local/bin/wkhtmltopdf'
+        #path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+        path_wkhtmltopdf = '/usr/local/bin/wkhtmltopdf'
         config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
-        pdf = pdfkit.from_url('http://127.0.0.1:8000/factura/', configuration=config)
+        pdf = pdfkit.from_url('http://127.0.0.1:5000/factura/', configuration=config)
         response = HttpResponse(pdf, content_type='application/pdf')
 
         return response
@@ -128,7 +128,7 @@ def view_pdf_factura_simple(request):
         #path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
         path_wkhtmltopdf = '/usr/local/bin/wkhtmltopdf'
         config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
-        pdf = pdfkit.from_url('http://127.0.0.1:8000/factura_simple/', configuration=config)
+        pdf = pdfkit.from_url('http://127.0.0.1:5000/factura_simple/', configuration=config)
         response = HttpResponse(pdf, content_type='application/pdf')
         return response
     else:

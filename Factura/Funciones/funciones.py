@@ -1,6 +1,22 @@
 from datetime import datetime
 import random
 from Factura.models import *
+
+meses = {
+    'ENERO':'01',
+    'FEBRERO':'02',
+    'MARZO':'03',
+    'ABRIL':'04',
+    'MAYO':'05',
+    'JUNIO':'06',
+    'JULIO':'07',
+    'AGOSTO':'08',
+    'SEPTIEMBRE':'09',
+    'OCTUBRE':'10',
+    'NOVIEMBRE':'11', 
+    'DICIEMBRE':'12',   
+}
+
 """
 ESta funcion de abajo es la que se encarga de extraer la fecha de hoy para imprimirla en el pdf
 """
@@ -17,11 +33,18 @@ def obtener_fecha():
 """
 Esta funcion de abajo es la que retorna un numero de factura para imprimirla en la factura
 """
-def obtener_numero_factura():
-    numero = str()
-    for i in [0,1,2,3,4]:
-        numero+= str(random.randint(0, 5))
-    return "F-" + numero
+def obtener_numero_factura(cifcliente, mes, ano):
+    #Este for es un apaño para obtener el numero de la tabla que ocupa en la base de datos
+    contador = 0
+    for _cliente in cliente.objects.all():
+        contador = contador +1
+        if _cliente.cif == cifcliente:
+            break
+            
+    nmes = str(meses[mes])
+
+    
+    return "F-" + str(nmes) + str(ano) + "/" + str(contador)
 
 
 """

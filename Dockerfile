@@ -25,4 +25,4 @@ RUN python3 -m pip install pdfkit
 RUN python3 -m pip install django
 RUN python3 -m pip install django-admin-interface
 
-CMD python3 manage.py runserver 0.0.0.0:8000
+CMD python3 manage.py runserver 0.0.0.0:5000
