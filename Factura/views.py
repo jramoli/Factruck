@@ -28,7 +28,7 @@ def view_html_factura(request):
     precio_final = total + iva - retencion
     _factura_con_precio = factura.objects.all().filter(
         cif_id=array_temporales[1], mes=array_temporales[2], año=array_temporales[3])
-    nfactura = obtener_numero_factura(array_temporales[0], array_temporales[2], array_temporales[3])
+    nfactura = obtener_numero_factura(array_temporales[1], array_temporales[2], array_temporales[3])
     contexto = {
         'facturas': _factura_con_precio,
         'clientes': _cliente,
@@ -63,7 +63,7 @@ def view_html_factura_simple(request):
         'clientes': _cliente,
         'empresas': _empresa,
         'fecha': obtener_fecha,
-        'numero_factura': obtener_numero_factura,
+        'numero_factura': obtener_numero_factura_simple(array_temporales[1], array_temporales[2], array_temporales[3]),
         'mes': array_temporales[2],
         'año': array_temporales[3],
         'cantidad_iva': array_temporales[4],

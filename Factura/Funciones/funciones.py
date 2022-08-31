@@ -36,15 +36,33 @@ Esta funcion de abajo es la que retorna un numero de factura para imprimirla en 
 def obtener_numero_factura(cifcliente, mes, ano):
     #Este for es un apaño para obtener el numero de la tabla que ocupa en la base de datos
     contador = 0
+    #print("El elegido es: " + cifcliente)
     for _cliente in cliente.objects.all():
+        #print("Uno de los cif: " + str(_cliente.cif))
         contador = contador +1
         if _cliente.cif == cifcliente:
             break
             
     nmes = str(meses[mes])
 
-    
     return "F-" + str(nmes) + str(ano) + "/" + str(contador)
+
+"""
+Esta funcion de abajo es la que retorna un numero de factura para imprimirla en la factura simple
+"""
+def obtener_numero_factura_simple(cifcliente, mes, ano):
+    #Este for es un apaño para obtener el numero de la tabla que ocupa en la base de datos
+    contador = 0
+    #print("El elegido es: " + cifcliente)
+    for _cliente in cliente.objects.all():
+        #print("Uno de los cif: " + str(_cliente.cif))
+        contador = contador +1
+        if _cliente.cif == cifcliente:
+            break
+            
+    nmes = str(meses[mes])
+
+    return "FS-" + str(nmes) + str(ano) + "/" + str(contador)
 
 
 """
