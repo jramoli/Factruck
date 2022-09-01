@@ -33,7 +33,7 @@ def view_html_factura(request):
         'facturas': _factura_con_precio,
         'clientes': _cliente,
         'empresas': _empresa,
-        'fecha': obtener_fecha,
+        'fecha': obtener_fecha2(array_temporales[2], array_temporales[3]),
         'numero_factura': nfactura,
         'mes': array_temporales[2],
         'año': array_temporales[3],
@@ -44,7 +44,6 @@ def view_html_factura(request):
         'retencion': round(retencion,2),
         'precio_total': round(precio_final,2),
     }
-    print(contexto['facturas'])
     return render(request, "factura.html", contexto)
 
 
@@ -62,7 +61,7 @@ def view_html_factura_simple(request):
         'facturas': _factura_con_precio,
         'clientes': _cliente,
         'empresas': _empresa,
-        'fecha': obtener_fecha,
+        'fecha': obtener_fecha2(array_temporales[2], array_temporales[3]),
         'numero_factura': obtener_numero_factura_simple(array_temporales[1], array_temporales[2], array_temporales[3]),
         'mes': array_temporales[2],
         'año': array_temporales[3],

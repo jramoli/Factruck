@@ -1,6 +1,7 @@
 from datetime import datetime
 import random
 from Factura.models import *
+from calendar import monthrange
 
 meses = {
     'ENERO':'01',
@@ -20,7 +21,7 @@ meses = {
 
 def obtener_fecha():
     """
-    ESta funcion de abajo es la que se encarga de extraer la fecha de hoy para imprimirla en el pdf
+    Esta funcion retorna la fecha del dia que se genera la factura (puede no ser conveniente si se quiere generar u factura de meses pasados)
     """
     now = datetime.now()
     dia = str(now.day)
@@ -31,6 +32,16 @@ def obtener_fecha():
 
     return str(fecha)
 
+
+def obtener_fecha2(mes, año):
+    """
+    Esta función retorna la fecha compuesta por el ultimo dia del mes y año del cual se esta facturando
+    """
+
+    nmes = str(meses[mes])
+    dia = monthrange(int(año), int(nmes))
+
+    return  f"{str(dia[1])}/{nmes}/{año}"
 
 def obtener_numero_factura(cifcliente, mes, ano):
     """
