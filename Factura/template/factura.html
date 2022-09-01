@@ -90,12 +90,12 @@
         <tbody>
           {% for factura in facturas %}
           <tr>
-            <td>{{factura.nif}}</td>
-            <td>{{factura.origen}}</td>
-            <td>{{factura.destino}}</td>
-            <td>{{factura.kg}}</td>
-            <td>{{factura.precio}}</td>
-            <td>{{factura.total}}</td>
+            <td class="fila_factura">{{factura.nif}}</td>
+            <td class="fila_factura">{{factura.origen}}</td>
+            <td class="fila_factura">{{factura.destino}}</td>
+            <td class="fila_factura">{{factura.kg}}</td>
+            <td class="fila_factura">{{factura.precio}}</td>
+            <td class="fila_factura">{{factura.total}}</td>
           </tr>
           {% endfor %}
         </tbody>

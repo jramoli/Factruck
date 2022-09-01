@@ -33,6 +33,10 @@ table {
 }
 
 /* tabla factua*/
+.fila_factura{
+    font-size: 10px;
+}
+
 .tabla-factura td{
     text-align: left;
 }

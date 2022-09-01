@@ -17,10 +17,11 @@ meses = {
     'DICIEMBRE':'12',   
 }
 
-"""
-ESta funcion de abajo es la que se encarga de extraer la fecha de hoy para imprimirla en el pdf
-"""
+
 def obtener_fecha():
+    """
+    ESta funcion de abajo es la que se encarga de extraer la fecha de hoy para imprimirla en el pdf
+    """
     now = datetime.now()
     dia = str(now.day)
     mes = str(now.month)
@@ -30,10 +31,11 @@ def obtener_fecha():
 
     return str(fecha)
 
-"""
-Esta funcion de abajo es la que retorna un numero de factura para imprimirla en la factura
-"""
+
 def obtener_numero_factura(cifcliente, mes, ano):
+    """
+    Esta funcion de abajo es la que retorna un numero de factura para imprimirla en la factura
+    """
     #Este for es un apaño para obtener el numero de la tabla que ocupa en la base de datos
     contador = 0
     #print("El elegido es: " + cifcliente)
@@ -47,10 +49,11 @@ def obtener_numero_factura(cifcliente, mes, ano):
 
     return "F-" + str(nmes) + str(ano) + "/" + str(contador)
 
-"""
-Esta funcion de abajo es la que retorna un numero de factura para imprimirla en la factura simple
-"""
+
 def obtener_numero_factura_simple(cifcliente, mes, ano):
+    """
+    Esta funcion de abajo es la que retorna un numero de factura para imprimirla en la factura simple
+    """
     #Este for es un apaño para obtener el numero de la tabla que ocupa en la base de datos
     contador = 0
     #print("El elegido es: " + cifcliente)
@@ -65,11 +68,12 @@ def obtener_numero_factura_simple(cifcliente, mes, ano):
     return "FS-" + str(nmes) + str(ano) + "/" + str(contador)
 
 
-"""
-Esta funcion de abajo es la que obtiene los datos temporales que estan en la base de datos y se los pasa a la view para que 
-haga las operaciones pertinentes
-"""
+
 def obtener_datos_temprales():
+    """
+    Esta funcion de abajo es la que obtiene los datos temporales que estan en la base de datos y se los pasa a la view para que 
+    haga las operaciones pertinentes
+    """
     array_temporales = []
     _temporal = temporal.objects.all()
     for campo in _temporal:
@@ -88,10 +92,11 @@ def obtener_datos_temprales():
     else:
         return array_temporales
 
-"""
-Esta funcion de abajo es la que calcula el precio final y el precio total de la factura normal
-"""
+
 def almacenar_total_factura(array_temporales):
+    """
+    Esta funcion de abajo es la que calcula el precio final y el precio total de la factura normal
+    """
     _factura = factura.objects.all().filter(mes=array_temporales[2], año=array_temporales[3], cif_id=array_temporales[1])
     total = 0
     for campo in _factura:
@@ -107,10 +112,11 @@ def almacenar_total_factura(array_temporales):
     return float(total)
 
 
-"""
-Esta funcion es la que calcula el precio final para la factura simple
-"""
+
 def almacenar_total_factura_simple(array_temporales):
+    """
+    Esta funcion es la que calcula el precio final para la factura simple
+    """
     _factura = factura_simple.objects.all().filter(mes=array_temporales[2], año=array_temporales[3], cif_id=array_temporales[1])
     total = 0
     for campo in _factura:
@@ -118,10 +124,11 @@ def almacenar_total_factura_simple(array_temporales):
         total = total + precio
     return float(total)
 
-"""
-Esta funcion tiene en cuenta si esta el lavado de cisterna activada
-"""
+
 def almacenar_lavado_sisterna(array):
+    """
+    Esta funcion tiene en cuenta si esta el lavado de cisterna activada
+    """
     try:
         lavado_repetido = 0
         #Con el _factura y el for compruebo si ya hay un lavado de cisterna en la factura de ese mes y año para no añadirlo duplicado
