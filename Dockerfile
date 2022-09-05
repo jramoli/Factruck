@@ -21,8 +21,8 @@ RUN apt install -y xfonts-base
 RUN dpkg -i driver/wkhtmltox_0.12.6-1.focal_amd64.deb
 
 #Instalar librerias python3
-RUN python3 -m pip install pdfkit
+RUN python3 -m pip install pdfkit==1.0.0
 RUN python3 -m pip install django
-RUN python3 -m pip install django-admin-interface
+RUN python3 -m pip install django-admin-interface==0.19.0
 
 CMD python3 manage.py runserver 0.0.0.0:5000
