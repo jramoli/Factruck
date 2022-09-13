@@ -14,6 +14,12 @@ table {
     margin: 0 auto;
     margin-bottom: 20px;
 }
+.text-center{
+    text-align: center;
+}
+thead{
+    text-align: left;
+}
 
 /*    Estilos clientes     */
 .cliente{
@@ -22,7 +28,7 @@ table {
     margin-bottom: 10px;
 }
 .cliente table{
-
+    padding: 10px;
     width: 100%;
     border: 2px solid rgb(0, 0, 0);
     border-radius: 25px;
@@ -42,9 +48,10 @@ table {
 }
 
 .footer{
-    margin-top: 25px;
+    margin-top: 15px;
+    width: 60%;
     margin-left: 60%;
-    font-size: 10px;
+    font-size: 15px;
 }
 .camion{
     width: 100%;
