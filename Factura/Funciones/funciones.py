@@ -141,19 +141,23 @@ def almacenar_lavado_sisterna(array):
     Esta funcion tiene en cuenta si esta el lavado de cisterna activada
     """
     try:
+        PRECIO_LAVADO_CISTERNA = "80"
+        LAVADO = "LAVADO DE CISTERNA"
+        SEPARADOR = "**********"
         lavado_repetido = 0
         #Con el _factura y el for compruebo si ya hay un lavado de cisterna en la factura de ese mes y año para no añadirlo duplicado
         _factura = factura.objects.all().filter(mes=array[2], año=array[3], cif_id=array[1])
         for campo in _factura:
-            if (campo.origen == "LAVADO DE CISTERNA"):
+            if (campo.origen == LAVADO):
                 lavado_repetido = lavado_repetido + 1
                  
-        LAVADO = "LAVADO DE CISTERNA"
-        SEPARADOR = "**********"
+
+        #Esta casuistica es la que hace que se añada un nuevo lavado de sisterna
         if (array[5] == "SI" and lavado_repetido == 0):
-            p=factura(cif_id=array[1], nif=SEPARADOR, origen=LAVADO, destino=SEPARADOR, mes=array[2], año=array[3], kg="0", precio="80")
+            p=factura(cif_id=array[1], nif=SEPARADOR, origen=LAVADO, destino=SEPARADOR, mes=array[2], año=array[3], kg="0", precio=PRECIO_LAVADO_CISTERNA)
             p.save()
+        #Esta casuistica elimina lavado de sisterna si ya hay una añadida y la opcion de lavado esta a no
         if(array[5] == "NO" and lavado_repetido == 1):
-            factura.objects.filter(cif_id=array[1], nif=SEPARADOR, origen=LAVADO, destino=SEPARADOR, mes=array[2], año=array[3], kg="0", precio="80").delete()
+            factura.objects.filter(cif_id=array[1], nif=SEPARADOR, origen=LAVADO, destino=SEPARADOR, mes=array[2], año=array[3], kg="0", precio=PRECIO_LAVADO_CISTERNA).delete()
     except Exception as e:
         print(repr(e))
